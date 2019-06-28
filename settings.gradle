@@ -1,1 +1,1 @@
-include ':app', ':rxpicker'
+include ':sample', ':library'
