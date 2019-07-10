@@ -7,11 +7,9 @@ import java.lang.annotation.RetentionPolicy;
 
 
 public class PickerConfig {
-
     public static final int SINGLE_IMG = 0x001;
     public static final int MULTIPLE_IMG = 0x002;
-    private int minValue = 1;
-    private int maxValue = 9;
+    private int maxSize = 9;
     private boolean showCamera = true;
     private int mode = SINGLE_IMG;
 
@@ -23,17 +21,12 @@ public class PickerConfig {
         this.mode = mode;
     }
 
-    public int getMaxValue() {
-        return maxValue;
+    public int getMaxSize() {
+        return maxSize;
     }
 
-    public int getMinValue() {
-        return minValue;
-    }
-
-    public void setLimit(int minValue, int maxValue) {
-        this.minValue = minValue;
-        this.maxValue = maxValue;
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
     }
 
     public boolean isShowCamera() {

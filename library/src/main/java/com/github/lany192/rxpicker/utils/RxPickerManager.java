@@ -50,8 +50,8 @@ public class RxPickerManager {
         config.setShowCamera(showCamera);
     }
 
-    public void limit(int minValue, int maxValue) {
-        config.setLimit(minValue, maxValue);
+    public void setMaxSize(int maxSize) {
+        config.setMaxSize(maxSize);
     }
 
     public void display(ImageView imageView, String path, int width, int height) {

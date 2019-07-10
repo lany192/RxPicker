@@ -14,29 +14,27 @@ import java.util.List;
 
 
 public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.ViewHolder> {
-    private List<Image> datas;
-
+    private List<Image> images;
     private int imageSize;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view =
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(datas.get(position));
+        holder.bind(images.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return datas == null ? 0 : datas.size();
+        return images == null ? 0 : images.size();
     }
 
-    public void setData(List<Image> datas) {
-        this.datas = datas;
+    public void setData(List<Image> images) {
+        this.images = images;
         notifyDataSetChanged();
     }
 
@@ -45,7 +43,7 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.ViewHolder
 
         private ViewHolder(View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.image);
+            image = itemView.findViewById(R.id.image);
         }
 
         private void bind(Image imageItem) {

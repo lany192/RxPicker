@@ -60,9 +60,9 @@ public class PickerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 if (config.isSingle()) {
                     RxBus.singleton().post(imageItem);
                 } else {
-                    int maxValue = config.getMaxValue();
+                    int maxValue = config.getMaxSize();
                     if (checkImage.size() == maxValue && !checkImage.contains(imageItem)) {
-                        T.show(holder.itemView.getContext(), holder.itemView.getContext().getString(R.string.rx_picker_max_select, config.getMaxValue()));
+                        T.show(holder.itemView.getContext(), holder.itemView.getContext().getString(R.string.rx_picker_max_select, config.getMaxSize()));
                         return;
                     }
                     boolean b = checkImage.contains(imageItem) ? checkImage.remove(imageItem)

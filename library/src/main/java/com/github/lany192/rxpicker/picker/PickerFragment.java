@@ -22,8 +22,8 @@ import com.github.lany192.rxpicker.R;
 import com.github.lany192.rxpicker.adapter.PickerFragmentAdapter;
 import com.github.lany192.rxpicker.base.AbstractFragment;
 import com.github.lany192.rxpicker.bean.FolderClickEvent;
-import com.github.lany192.rxpicker.bean.ImageFolder;
 import com.github.lany192.rxpicker.bean.Image;
+import com.github.lany192.rxpicker.bean.ImageFolder;
 import com.github.lany192.rxpicker.preview.PreviewActivity;
 import com.github.lany192.rxpicker.utils.CameraHelper;
 import com.github.lany192.rxpicker.utils.DensityUtil;
@@ -103,13 +103,7 @@ public class PickerFragment extends AbstractFragment<PickerFragmentPresenter>
     }
 
     private void selectSuccess() {
-        int minValue = config.getMinValue();
-        ArrayList<Image> checkImage = adapter.getCheckImage();
-        if (checkImage.size() < minValue) {
-            T.show(getContext(), getString(R.string.rx_picker_min_image, minValue));
-            return;
-        }
-        handleResult(checkImage);
+        handleResult(adapter.getCheckImage());
     }
 
     private void previewImage() {
@@ -177,7 +171,7 @@ public class PickerFragment extends AbstractFragment<PickerFragmentPresenter>
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), DEFAULT_SPAN_COUNT);
         recyclerView.setLayoutManager(layoutManager);
 
-        final GridDivider decoration = new GridDivider(getActivity());
+        final GridDivider decoration = new GridDivider(getContext());
         Drawable divider = decoration.getDivider();
         int imageWidth = DensityUtil.getDeviceWidth(getActivity()) / DEFAULT_SPAN_COUNT
                 + divider.getIntrinsicWidth() * DEFAULT_SPAN_COUNT - 1;
@@ -190,12 +184,12 @@ public class PickerFragment extends AbstractFragment<PickerFragmentPresenter>
             @Override
             public void onItemRangeChanged(int positionStart, int itemCount) {
                 tvSelectOk.setText(getString(R.string.rx_picker_select_confim, adapter.getCheckImage().size(),
-                        config.getMaxValue()));
+                        config.getMaxSize()));
             }
         });
 
         tvSelectOk.setText(
-                getString(R.string.rx_picker_select_confim, adapter.getCheckImage().size(), config.getMaxValue()));
+                getString(R.string.rx_picker_select_confim, adapter.getCheckImage().size(), config.getMaxSize()));
     }
 
     @Override

@@ -16,7 +16,6 @@ import com.github.lany192.rxpicker.utils.DensityUtil;
 
 import java.util.List;
 
-
 public class PopWindowManager {
     private PopupWindow popupWindow;
     private FolderAdapter folderAdapter;
