@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (tvSingleImg == v) {
-            Disposable subscribe = RxPicker.of().start(this).subscribe(new Consumer<List<Image>>() {
+            Disposable subscribe = RxPicker.of()
+                    .start(this)
+                    .subscribe(new Consumer<List<Image>>() {
                 @Override
                 public void accept(@NonNull List<Image> imageItems) throws Exception {
                     adapter.setData(imageItems);
