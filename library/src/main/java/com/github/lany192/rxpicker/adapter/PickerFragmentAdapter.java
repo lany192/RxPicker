@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.github.lany192.rxpicker.R;
-import com.github.lany192.rxpicker.bean.ImageItem;
+import com.github.lany192.rxpicker.bean.Image;
 import com.github.lany192.rxpicker.utils.PickerConfig;
 import com.github.lany192.rxpicker.utils.RxBus;
 import com.github.lany192.rxpicker.utils.RxPickerManager;
@@ -19,17 +19,13 @@ import java.util.List;
 
 
 public class PickerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private static final int CAMERA_TYPE = 0;
     private static final int NORMAL_TYPE = 1;
-
     private View.OnClickListener cameraClickListener;
-
     private int imageWidth;
     private PickerConfig config;
-
-    private List<ImageItem> datas;
-    private List<ImageItem> checkImage;
+    private List<Image> datas;
+    private List<Image> checkImage;
 
     public PickerFragmentAdapter(int imageWidth) {
         config = RxPickerManager.getInstance().getConfig();
@@ -40,11 +36,9 @@ public class PickerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (CAMERA_TYPE == viewType) {
-            return new CameraViewHolder(
-                    LayoutInflater.from(parent.getContext()).inflate(R.layout.rx_picker_item_camera, parent, false));
+            return new CameraViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rx_picker_item_camera, parent, false));
         } else {
-            return new PickerViewHolder(
-                    LayoutInflater.from(parent.getContext()).inflate(R.layout.rx_picker_item_picker, parent, false));
+            return new PickerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rx_picker_item_picker, parent, false));
         }
     }
 
@@ -56,7 +50,7 @@ public class PickerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
         int dataPosition = config.isShowCamera() ? position - 1 : position;
 
-        final ImageItem imageItem = datas.get(dataPosition);
+        final Image imageItem = datas.get(dataPosition);
         PickerViewHolder pickerViewHolder = (PickerViewHolder) holder;
         pickerViewHolder.bind(imageItem);
 
@@ -68,7 +62,7 @@ public class PickerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 } else {
                     int maxValue = config.getMaxValue();
                     if (checkImage.size() == maxValue && !checkImage.contains(imageItem)) {
-                        T.show(holder.itemView.getContext(), holder.itemView.getContext().getString(R.string.max_select, config.getMaxValue()));
+                        T.show(holder.itemView.getContext(), holder.itemView.getContext().getString(R.string.rx_picker_max_select, config.getMaxValue()));
                         return;
                     }
                     boolean b = checkImage.contains(imageItem) ? checkImage.remove(imageItem)
@@ -98,7 +92,7 @@ public class PickerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    public void setData(List<ImageItem> data) {
+    public void setData(List<Image> data) {
         this.datas = data;
     }
 
@@ -106,8 +100,8 @@ public class PickerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.cameraClickListener = cameraClickListener;
     }
 
-    public ArrayList<ImageItem> getCheckImage() {
-        return (ArrayList<ImageItem>) checkImage;
+    public ArrayList<Image> getCheckImage() {
+        return (ArrayList<Image>) checkImage;
     }
 
     private class PickerViewHolder extends RecyclerView.ViewHolder {
@@ -121,7 +115,7 @@ public class PickerFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             cbCheck = (AppCompatCheckBox) itemView.findViewById(R.id.cb_check);
         }
 
-        private void bind(ImageItem imageItem) {
+        private void bind(Image imageItem) {
             ViewGroup.LayoutParams layoutParams = imageView.getLayoutParams();
             layoutParams.width = imageWidth;
             layoutParams.height = imageWidth;

@@ -6,20 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.github.lany192.rxpicker.bean.ImageItem;
+import com.github.lany192.rxpicker.bean.Image;
 import com.github.lany192.rxpicker.utils.DensityUtil;
 import com.github.lany192.rxpicker.utils.RxPickerManager;
 
 import java.util.List;
 
+
 public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.ViewHolder> {
-    private List<ImageItem> datas;
+    private List<Image> datas;
 
     private int imageSize;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
+        View view =
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
         return new ViewHolder(view);
     }
 
@@ -33,7 +35,7 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.ViewHolder
         return datas == null ? 0 : datas.size();
     }
 
-    public void setData(List<ImageItem> datas) {
+    public void setData(List<Image> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
@@ -43,10 +45,10 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.ViewHolder
 
         private ViewHolder(View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
+            image = (ImageView) itemView.findViewById(R.id.image);
         }
 
-        private void bind(ImageItem imageItem) {
+        private void bind(Image imageItem) {
             imageSize = DensityUtil.getDeviceWidth(itemView.getContext()) / 3;
             RxPickerManager.getInstance().display(image, imageItem.getPath(), imageSize, imageSize);
         }

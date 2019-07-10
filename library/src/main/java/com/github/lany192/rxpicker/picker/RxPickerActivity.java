@@ -45,7 +45,7 @@ public class RxPickerActivity extends AppCompatActivity {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 setupFragment();
             } else {
-                T.show(RxPickerActivity.this, getString(R.string.permissions_error));
+                T.show(RxPickerActivity.this, getString(R.string.rx_picker_permissions_error));
                 finish();
             }
         }

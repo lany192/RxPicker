@@ -31,6 +31,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        android:src="@drawable/ic_emoji" />
+        android:src="@drawable/rx_picker_emoji" />
 
 </RelativeLayout>

@@ -3,7 +3,7 @@ package com.github.lany192.rxpicker.utils;
 import android.content.Intent;
 import android.widget.ImageView;
 
-import com.github.lany192.rxpicker.bean.ImageItem;
+import com.github.lany192.rxpicker.bean.Image;
 import com.github.lany192.rxpicker.picker.PickerFragment;
 
 import java.util.List;
@@ -50,8 +50,8 @@ public class RxPickerManager {
         config.setShowCamera(showCamera);
     }
 
-    public void limit( int maxValue) {
-        config.setLimit( maxValue);
+    public void limit(int minValue, int maxValue) {
+        config.setLimit(minValue, maxValue);
     }
 
     public void display(ImageView imageView, String path, int width, int height) {
@@ -61,7 +61,7 @@ public class RxPickerManager {
         imageLoader.display(imageView, path, width, height);
     }
 
-    public List<ImageItem> getResult(Intent intent) {
-        return (List<ImageItem>) intent.getSerializableExtra(PickerFragment.MEDIA_RESULT);
+    public List<Image> getResult(Intent intent) {
+        return (List<Image>) intent.getSerializableExtra(PickerFragment.MEDIA_RESULT);
     }
 }

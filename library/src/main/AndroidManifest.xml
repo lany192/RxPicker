@@ -11,24 +11,23 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".picker.RxPickerActivity"
+            android:name="com.github.lany192.rxpicker.picker.RxPickerActivity"
             android:launchMode="singleTop"
             android:theme="@style/RxPicker.AppTheme" />
 
         <activity
-            android:name=".preview.PreviewActivity"
+            android:name="com.github.lany192.rxpicker.preview.PreviewActivity"
             android:launchMode="singleTop"
             android:theme="@style/RxPicker.AppTheme" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="com.github.lany192.rxpicker.utils.RxPickerProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
-
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path" />
+                android:resource="@xml/rx_picker_file_path" />
         </provider>
 
     </application>

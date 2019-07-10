@@ -10,22 +10,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.github.lany192.rxpicker.R;
-import com.github.lany192.rxpicker.bean.ImageItem;
 import com.github.lany192.rxpicker.adapter.PreviewAdapter;
+import com.github.lany192.rxpicker.bean.Image;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class PreviewActivity extends AppCompatActivity {
-
     private Toolbar toolbar;
     private ViewPager vpPreview;
     private PreviewAdapter vpAdapter;
+    private List<Image> data;
 
-    private List<ImageItem> data;
-
-    public static void start(Context context, ArrayList<ImageItem> data) {
+    public static void start(Context context, ArrayList<Image> data) {
         Intent intent = new Intent(context, PreviewActivity.class);
         intent.putExtra("preview_list", data);
         context.startActivity(intent);
@@ -49,7 +47,7 @@ public class PreviewActivity extends AppCompatActivity {
     }
 
     private void handleData() {
-        data = (List<ImageItem>) getIntent().getSerializableExtra("preview_list");
+        data = (List<Image>) getIntent().getSerializableExtra("preview_list");
     }
 
     private void setupToolbar() {

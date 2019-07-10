@@ -2,7 +2,6 @@ package com.github.lany192.rxpicker.bean;
 
 
 public class FolderClickEvent {
-
     private int position;
     private ImageFolder folder;
 

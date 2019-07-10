@@ -55,7 +55,11 @@ public final class DensityUtil {
                 .getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(dm);
         Screen screen = new Screen();
-        screen.widthPixels = dm.widthPixels;        screen.heightPixels = dm.heightPixels;        screen.densityDpi = dm.densityDpi;        screen.density = dm.density;        return screen;
+        screen.widthPixels = dm.widthPixels;// e.g. 1080
+        screen.heightPixels = dm.heightPixels;// e.g. 1920
+        screen.densityDpi = dm.densityDpi;// e.g. 480
+        screen.density = dm.density;// e.g. 2.0
+        return screen;
     }
 
     public static void backgroundAlpha(Activity activity, float bgAlpha) {

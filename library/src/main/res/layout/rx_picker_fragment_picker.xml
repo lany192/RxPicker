@@ -21,13 +21,13 @@
             android:maxWidth="120dp"
             android:maxLines="1"
             android:minWidth="50dp"
-            android:text="@string/all_phone_album" />
+            android:text="@string/rx_picker_all_phone_album" />
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:paddingLeft="7dp"
-            android:src="@drawable/ic_spinner_mtrl_am_alpha" />
+            android:src="@drawable/rx_picker_spinner" />
     </android.support.v7.widget.Toolbar>
 
 
@@ -45,7 +45,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:padding="10dp"
-            android:src="@drawable/ic_eye_white" />
+            android:src="@drawable/rx_picker_eye_white" />
 
         <TextView
             android:id="@+id/iv_select_ok"
@@ -63,5 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rl_bottom"
-        android:layout_below="@id/nav_top_bar" />
+        android:layout_below="@id/nav_top_bar"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="1dp" />
 </RelativeLayout>

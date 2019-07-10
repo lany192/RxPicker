@@ -2,8 +2,8 @@
 <resources>
     <color name="rx_picker_colorPrimary">#000000</color>
     <color name="rx_picker_colorPrimaryDark">#000000</color>
-    <color name="rx_picker_colorPrimaryAlpha">#44000000</color>
+    <color name="rx_picker_colorPrimaryAlpha">#000000</color>
     <color name="rx_picker_colorAccent">#000000</color>
-    <color name="rx_picker_black">#000</color>
-    <color name="rx_picker_width">#FFF</color>
+    <color name="rx_picker_black">#000000</color>
+    <color name="rx_picker_width">#FFFfff</color>
 </resources>

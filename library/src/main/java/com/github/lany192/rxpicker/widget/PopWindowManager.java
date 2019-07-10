@@ -11,68 +11,48 @@ import android.widget.TextView;
 
 import com.github.lany192.rxpicker.R;
 import com.github.lany192.rxpicker.bean.ImageFolder;
-import com.github.lany192.rxpicker.adapter.PickerAlbumAdapter;
+import com.github.lany192.rxpicker.adapter.FolderAdapter;
 import com.github.lany192.rxpicker.utils.DensityUtil;
 
 import java.util.List;
 
 
 public class PopWindowManager {
-
-    private PopupWindow mAlbumPopWindow;
-    private PickerAlbumAdapter albumAdapter;
+    private PopupWindow popupWindow;
+    private FolderAdapter folderAdapter;
 
     public void init(final TextView title, final List<ImageFolder> data) {
-        albumAdapter = new PickerAlbumAdapter(data, DensityUtil.dp2px(title.getContext(), 80));
-        albumAdapter.setDismissListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismissAlbumWindow();
-            }
-        });
-
-        title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopWindow(v, data, albumAdapter);
-            }
-        });
+        folderAdapter = new FolderAdapter(data, DensityUtil.dp2px(title.getContext(), 80));
+        folderAdapter.setDismissListener(v -> dismissAlbumWindow());
+        title.setOnClickListener(v -> showPopWindow(v, data, folderAdapter));
     }
 
-    private void showPopWindow(View v, List<ImageFolder> data, PickerAlbumAdapter albumAdapter) {
-        if (mAlbumPopWindow == null) {
+    private void showPopWindow(View v, List<ImageFolder> data, FolderAdapter albumAdapter) {
+        if (popupWindow == null) {
             int height = DensityUtil.dp2px(v.getContext(), 300);
             View windowView = createWindowView(v, albumAdapter);
-            mAlbumPopWindow =
-                    new PopupWindow(windowView, ViewGroup.LayoutParams.MATCH_PARENT, height, true);
-            mAlbumPopWindow.setAnimationStyle(R.style.RxPicker_PopupAnimation);
-            mAlbumPopWindow.setContentView(windowView);
-            mAlbumPopWindow.setOutsideTouchable(true);
+            popupWindow = new PopupWindow(windowView, ViewGroup.LayoutParams.MATCH_PARENT, height, true);
+            popupWindow.setAnimationStyle(R.style.RxPicker_PopupAnimation);
+            popupWindow.setContentView(windowView);
+            popupWindow.setOutsideTouchable(true);
         }
-        mAlbumPopWindow.showAsDropDown(v, 0, 0);
+        popupWindow.showAsDropDown(v, 0, 0);
     }
 
     @NonNull
-    private View createWindowView(View clickView, PickerAlbumAdapter albumAdapter) {
-        View view =
-                LayoutInflater.from(clickView.getContext()).inflate(R.layout.rx_picker_item_popwindow_album, null);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.album_recycleview);
-        recyclerView.setLayoutManager(
-                new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+    private View createWindowView(View clickView, FolderAdapter albumAdapter) {
+        View view = LayoutInflater.from(clickView.getContext()).inflate(R.layout.rx_picker_item_popwindow_album, null);
+        RecyclerView recyclerView = view.findViewById(R.id.album_recycleview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         View albumShadowLayout = view.findViewById(R.id.album_shadow);
-        albumShadowLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismissAlbumWindow();
-            }
-        });
+        albumShadowLayout.setOnClickListener(v -> dismissAlbumWindow());
         recyclerView.setAdapter(albumAdapter);
         return view;
     }
 
     private void dismissAlbumWindow() {
-        if (mAlbumPopWindow != null && mAlbumPopWindow.isShowing()) {
-            mAlbumPopWindow.dismiss();
+        if (popupWindow != null && popupWindow.isShowing()) {
+            popupWindow.dismiss();
         }
     }
 }

@@ -19,7 +19,7 @@
 1.添加 gradle 引用
 
 ```
-compile 'com.caimuhao:rxpicker:1.1.5'
+compile 'com.github.lany192.rxpicker:1.1.5'
 ```
 
 2.继承 `RxPickerImageLoader` 创建自定义的图片加载
@@ -48,8 +48,8 @@ RxPicker.init(new GlideImageLoader());
 
 - 图片单选
 ```
-RxPicker.of().start(this).subscribe(new Consumer<List<ImageItem>>() {
-        @Override public void accept(@NonNull List<ImageItem> imageItems) throws Exception {
+RxPicker.of().start(this).subscribe(new Consumer<List<Image>>() {
+        @Override public void accept(@NonNull List<Image> imageItems) throws Exception {
           //得到结果
         }
       });
@@ -63,8 +63,8 @@ RxPicker.of()
           .camera(true)
           .limit(3,9)
           .start(this)
-          .subscribe(new Consumer<List<ImageItem>>() {
-            @Override public void accept(@NonNull List<ImageItem> imageItems) throws Exception {
+          .subscribe(new Consumer<List<Image>>() {
+            @Override public void accept(@NonNull List<Image> imageItems) throws Exception {
               //得到结果
             }
           });

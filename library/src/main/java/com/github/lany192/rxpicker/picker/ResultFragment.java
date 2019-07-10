@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 
-import com.github.lany192.rxpicker.bean.ImageItem;
+import com.github.lany192.rxpicker.bean.Image;
 import com.github.lany192.rxpicker.utils.RxPickerManager;
 
 import java.util.List;
@@ -16,17 +16,16 @@ import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
 
-public class ResultHandlerFragment extends Fragment {
-
+public class ResultFragment extends Fragment {
     public static final int REQUEST_CODE = 0x00100;
-    PublishSubject<List<ImageItem>> resultSubject = PublishSubject.create();
-    BehaviorSubject<Boolean> attachSubject = BehaviorSubject.create();
+    private PublishSubject<List<Image>> resultSubject = PublishSubject.create();
+    private BehaviorSubject<Boolean> attachSubject = BehaviorSubject.create();
 
-    public static ResultHandlerFragment newInstance() {
-        return new ResultHandlerFragment();
+    public static ResultFragment newInstance() {
+        return new ResultFragment();
     }
 
-    public PublishSubject<List<ImageItem>> getResultSubject() {
+    public PublishSubject<List<Image>> getResultSubject() {
         return resultSubject;
     }
 

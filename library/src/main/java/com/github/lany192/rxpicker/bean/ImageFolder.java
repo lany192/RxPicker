@@ -3,16 +3,13 @@ package com.github.lany192.rxpicker.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ImageFolder implements Serializable {
-
     private int id;
-
     private String name;
-
-    private ArrayList<ImageItem> images = new ArrayList<>();
-
+    private List<Image> images = new ArrayList<>();
     private boolean isChecked;
 
     public ImageFolder() {
@@ -40,12 +37,16 @@ public class ImageFolder implements Serializable {
         this.name = name;
     }
 
-    public ArrayList<ImageItem> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void addPhoto(ImageItem photo) {
-        this.images.add(photo);
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    public void addImage(Image image) {
+        this.images.add(image);
     }
 
     public boolean isChecked() {

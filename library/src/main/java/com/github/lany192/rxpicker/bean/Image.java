@@ -3,25 +3,20 @@ package com.github.lany192.rxpicker.bean;
 import java.io.Serializable;
 
 
-public class ImageItem implements Serializable, Comparable<ImageItem> {
-
-
+public class Image implements Serializable, Comparable<Image> {
     private int id;
-
     private String path;
-
     private String name;
-
     private long addTime;
 
-    public ImageItem(int id, String path, String name, long addTime) {
+    public Image(int id, String path, String name, long addTime) {
         this.id = id;
         this.path = path;
         this.name = name;
         this.addTime = addTime;
     }
 
-    public ImageItem() {
+    public Image() {
     }
 
     public int getId() {
@@ -56,7 +51,7 @@ public class ImageItem implements Serializable, Comparable<ImageItem> {
         this.path = path;
     }
 
-    public int compareTo(ImageItem o) {
+    public int compareTo(Image o) {
         long time = o.getAddTime() - getAddTime();
         if (time > Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;

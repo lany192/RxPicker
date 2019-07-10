@@ -6,7 +6,7 @@ import android.provider.MediaStore;
 
 import com.github.lany192.rxpicker.R;
 import com.github.lany192.rxpicker.bean.ImageFolder;
-import com.github.lany192.rxpicker.bean.ImageItem;
+import com.github.lany192.rxpicker.bean.Image;
 import com.github.lany192.rxpicker.utils.T;
 
 import java.util.ArrayList;
@@ -19,7 +19,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -27,15 +26,19 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PickerFragmentPresenter extends PickerFragmentContract.Presenter {
 
-
     private static final String[] STORE_IMAGES = {
-            MediaStore.Images.Media._ID,             MediaStore.Images.Media.DATA,             MediaStore.Images.Media.DISPLAY_NAME,             MediaStore.Images.Media.DATE_ADDED,             MediaStore.Images.Media.BUCKET_ID,             MediaStore.Images.Media.BUCKET_DISPLAY_NAME     };
+            MediaStore.Images.Media._ID, // image id.
+            MediaStore.Images.Media.DATA, // image absolute path.
+            MediaStore.Images.Media.DISPLAY_NAME, // image name.
+            MediaStore.Images.Media.DATE_ADDED, // The time to be added to the library.
+            MediaStore.Images.Media.BUCKET_ID, // folder id.
+            MediaStore.Images.Media.BUCKET_DISPLAY_NAME // folder name.
+    };
 
     @Override
     public void start() {
 
     }
-
 
     private Observable<List<ImageFolder>> loadAllFolder(final Context context) {
         return Observable.just(true).map(new Function<Boolean, List<ImageFolder>>() {
@@ -48,7 +51,7 @@ public class PickerFragmentPresenter extends PickerFragmentContract.Presenter {
 
                 ImageFolder allImageImageFolder = new ImageFolder();
                 allImageImageFolder.setChecked(true);
-                allImageImageFolder.setName(context.getString(R.string.all_phone_album));
+                allImageImageFolder.setName(context.getString(R.string.rx_picker_all_phone_album));
 
                 while (cursor.moveToNext()) {
                     int imageId = cursor.getInt(0);
@@ -59,15 +62,15 @@ public class PickerFragmentPresenter extends PickerFragmentContract.Presenter {
                     int bucketId = cursor.getInt(4);
                     String bucketName = cursor.getString(5);
 
-                    ImageItem ImageItem = new ImageItem(imageId, imagePath, imageName, addTime);
-                    allImageImageFolder.addPhoto(ImageItem);
+                    Image Image = new Image(imageId, imagePath, imageName, addTime);
+                    allImageImageFolder.addImage(Image);
 
                     ImageFolder imageFolder = albumFolderMap.get(bucketName);
                     if (imageFolder != null) {
-                        imageFolder.addPhoto(ImageItem);
+                        imageFolder.addImage(Image);
                     } else {
                         imageFolder = new ImageFolder(bucketId, bucketName);
-                        imageFolder.addPhoto(ImageItem);
+                        imageFolder.addImage(Image);
 
                         albumFolderMap.put(bucketName, imageFolder);
                     }
@@ -99,22 +102,7 @@ public class PickerFragmentPresenter extends PickerFragmentContract.Presenter {
                         view.showWaitDialog();
                     }
                 })
-                .doOnTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        view.hideWaitDialog();
-                    }
-                })
-                .subscribe(new Consumer<List<ImageFolder>>() {
-                    @Override
-                    public void accept(@NonNull List<ImageFolder> imageFolders) throws Exception {
-                        view.showAllImage(imageFolders);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(@NonNull Throwable throwable) throws Exception {
-                        T.show(context, context.getString(R.string.load_image_error));
-                    }
-                });
+                .doOnTerminate(() -> view.hideWaitDialog())
+                .subscribe(imageFolders -> view.showAllImage(imageFolders), throwable -> T.show(context, context.getString(R.string.rx_picker_load_image_error)));
     }
 }

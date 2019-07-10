@@ -5,7 +5,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -19,12 +19,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.lany192.rxpicker.R;
+import com.github.lany192.rxpicker.adapter.PickerFragmentAdapter;
 import com.github.lany192.rxpicker.base.AbstractFragment;
 import com.github.lany192.rxpicker.bean.FolderClickEvent;
 import com.github.lany192.rxpicker.bean.ImageFolder;
-import com.github.lany192.rxpicker.bean.ImageItem;
-import com.github.lany192.rxpicker.decoration.GridDecoration;
-import com.github.lany192.rxpicker.adapter.PickerFragmentAdapter;
+import com.github.lany192.rxpicker.bean.Image;
 import com.github.lany192.rxpicker.preview.PreviewActivity;
 import com.github.lany192.rxpicker.utils.CameraHelper;
 import com.github.lany192.rxpicker.utils.DensityUtil;
@@ -32,6 +31,7 @@ import com.github.lany192.rxpicker.utils.PickerConfig;
 import com.github.lany192.rxpicker.utils.RxBus;
 import com.github.lany192.rxpicker.utils.RxPickerManager;
 import com.github.lany192.rxpicker.utils.T;
+import com.github.lany192.rxpicker.widget.GridDivider;
 import com.github.lany192.rxpicker.widget.PopWindowManager;
 
 import java.io.File;
@@ -103,14 +103,19 @@ public class PickerFragment extends AbstractFragment<PickerFragmentPresenter>
     }
 
     private void selectSuccess() {
-        ArrayList<ImageItem> checkImage = adapter.getCheckImage();
+        int minValue = config.getMinValue();
+        ArrayList<Image> checkImage = adapter.getCheckImage();
+        if (checkImage.size() < minValue) {
+            T.show(getContext(), getString(R.string.rx_picker_min_image, minValue));
+            return;
+        }
         handleResult(checkImage);
     }
 
     private void previewImage() {
-        ArrayList<ImageItem> checkImage = adapter.getCheckImage();
+        ArrayList<Image> checkImage = adapter.getCheckImage();
         if (checkImage.isEmpty()) {
-            T.show(getContext(), getString(R.string.select_one_image));
+            T.show(getContext(), getString(R.string.rx_picker_select_one_image));
             return;
         }
         PreviewActivity.start(getActivity(), checkImage);
@@ -144,11 +149,11 @@ public class PickerFragment extends AbstractFragment<PickerFragmentPresenter>
                 });
 
         imageItemsubscribe =
-                RxBus.singleton().toObservable(ImageItem.class).subscribe(new Consumer<ImageItem>() {
+                RxBus.singleton().toObservable(Image.class).subscribe(new Consumer<Image>() {
                     @Override
-                    public void accept(@io.reactivex.annotations.NonNull ImageItem imageItem)
+                    public void accept(@io.reactivex.annotations.NonNull Image imageItem)
                             throws Exception {
-                        ArrayList<ImageItem> data = new ArrayList<>();
+                        ArrayList<Image> data = new ArrayList<>();
                         data.add(imageItem);
                         handleResult(data);
                     }
@@ -172,23 +177,25 @@ public class PickerFragment extends AbstractFragment<PickerFragmentPresenter>
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), DEFAULT_SPAN_COUNT);
         recyclerView.setLayoutManager(layoutManager);
 
+        final GridDivider decoration = new GridDivider(getActivity());
+        Drawable divider = decoration.getDivider();
         int imageWidth = DensityUtil.getDeviceWidth(getActivity()) / DEFAULT_SPAN_COUNT
-                + 2 * DEFAULT_SPAN_COUNT - 1;
+                + divider.getIntrinsicWidth() * DEFAULT_SPAN_COUNT - 1;
 
         adapter = new PickerFragmentAdapter(imageWidth);
         adapter.setCameraClickListener(new CameraClickListener());
-        recyclerView.addItemDecoration(new GridDecoration().setWidth(2).setSpanCount(DEFAULT_SPAN_COUNT).setColor(Color.BLACK).setShowBorder(false));
+        recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(adapter);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeChanged(int positionStart, int itemCount) {
-                tvSelectOk.setText(getString(R.string.select_confim, adapter.getCheckImage().size(),
+                tvSelectOk.setText(getString(R.string.rx_picker_select_confim, adapter.getCheckImage().size(),
                         config.getMaxValue()));
             }
         });
 
         tvSelectOk.setText(
-                getString(R.string.select_confim, adapter.getCheckImage().size(), config.getMaxValue()));
+                getString(R.string.rx_picker_select_confim, adapter.getCheckImage().size(), config.getMaxValue()));
     }
 
     @Override
@@ -208,12 +215,13 @@ public class PickerFragment extends AbstractFragment<PickerFragmentPresenter>
         }
         ImageFolder allImageFolder = allFolder.get(0);
         allImageFolder.setChecked(true);
-        ImageItem item = new ImageItem(0, file.getAbsolutePath(), file.getName(), System.currentTimeMillis());
+        Image item =
+                new Image(0, file.getAbsolutePath(), file.getName(), System.currentTimeMillis());
         allImageFolder.getImages().add(0, item);
         RxBus.singleton().post(new FolderClickEvent(0, allImageFolder));
     }
 
-    private void handleResult(ArrayList<ImageItem> data) {
+    private void handleResult(ArrayList<Image> data) {
         Intent intent = new Intent();
         intent.putExtra(MEDIA_RESULT, data);
         getActivity().setResult(Activity.RESULT_OK, intent);
@@ -258,7 +266,7 @@ public class PickerFragment extends AbstractFragment<PickerFragmentPresenter>
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 takePictures();
             } else {
-                T.show(getContext(), getString(R.string.permissions_error));
+                T.show(getContext(), getString(R.string.rx_picker_permissions_error));
             }
         }
     }
