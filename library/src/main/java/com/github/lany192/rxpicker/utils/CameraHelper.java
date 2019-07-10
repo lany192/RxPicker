@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
@@ -24,7 +23,7 @@ public class CameraHelper {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (intent.resolveActivity(fragment.getActivity().getPackageManager()) != null) {
-            takeImageFile = createFile();
+            takeImageFile = createFile(fragment.getActivity());
             Uri uri;
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                 String authorities = ProviderUtil.getFileProviderName(fragment.getContext());
@@ -41,14 +40,16 @@ public class CameraHelper {
         return takeImageFile;
     }
 
-    private static File createFile() {
-        File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-        if (!folder.exists() || !folder.isDirectory()) {
-            folder.mkdirs();
-        }
+    private static File createFile(Context context) {
+        //这个路径要和rx_picker_file_path.xml中配置的匹配
+        String path = context.getFilesDir() + File.separator + "images" + File.separator;
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA);
-        String filename = "IMG_" + dateFormat.format(new Date()) + ".jpg";
-        return new File(folder, filename);
+        String filename = "RxPicker_" + dateFormat.format(new Date()) + ".jpg";
+        File file = new File(path, filename);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+        return file;
     }
 
     public static void scanPic(Context context, File file) {
