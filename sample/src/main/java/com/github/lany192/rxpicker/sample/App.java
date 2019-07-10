@@ -15,7 +15,6 @@ public class App extends Application {
         super.onCreate();
         RxPicker.init((imageView, path, width, height) -> Glide.with(imageView.getContext())
                 .load(path)
-                .error(R.drawable.rx_picker_preview_image)
                 .centerCrop()
                 .override(width, height)
                 .into(imageView));

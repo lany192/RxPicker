@@ -3,7 +3,7 @@
     android:id="@+id/camera_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/black"
+    android:background="@color/rx_picker_colorPrimaryDark"
     android:minWidth="100dp"
     android:minHeight="100dp">
 

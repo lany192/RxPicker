@@ -43,7 +43,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:padding="10dp"
-            android:src="@drawable/rx_picker_eye_white" />
+            android:src="@drawable/rx_picker_preview" />
 
         <TextView
             android:id="@+id/iv_select_ok"
