@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/lany192/RxPicker.svg)](https://jitpack.io/#lany192/RxPicker)
+
 ## RxPicker
 
 基于 RxJava 的 Android 图片选择器.
@@ -27,7 +29,7 @@
 	}
 
     dependencies {
-        implementation 'com.github.lany192:RxPicker:1.0.3'
+        implementation 'com.github.lany192:RxPicker:2.0.2'
     }
 
 2.继承 `RxPickerImageLoader` 创建自定义的图片加载
