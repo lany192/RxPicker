@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rxpicker_colorPrimary">#303030</color>
+    <color name="rxpicker_colorPrimaryDark">#303030</color>
+    <color name="rxpicker_colorPrimaryAlpha">#303030</color>
+    <color name="rxpicker_colorAccent">#1aad19</color>
+    <color name="rxpicker_black">#000000</color>
+    <color name="rxpicker_width">#FFFFFF</color>
+</resources>

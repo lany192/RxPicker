@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <!--files-path  相当于 getFilesDir（）-->
-    <files-path name="rx_picker_images" path="images"/>
-</paths>

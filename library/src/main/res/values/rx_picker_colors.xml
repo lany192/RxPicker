@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="rx_picker_colorPrimary">#303030</color>
-    <color name="rx_picker_colorPrimaryDark">#303030</color>
-    <color name="rx_picker_colorPrimaryAlpha">#303030</color>
-    <color name="rx_picker_colorAccent">#303030</color>
-    <color name="rx_picker_black">#000000</color>
-    <color name="rx_picker_width">#FFFfff</color>
-</resources>

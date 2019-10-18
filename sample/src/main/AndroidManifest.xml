@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.lany192.rxpicker.sample">
+    package="com.caimuhao.sample">
 
 
     <application
-        android:name=".App"
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.github.lany192.rxpicker.sample.MainActivity">
+        android:theme="@style/RxPicker.AppTheme">
+        <activity android:name="com.caimuhao.sample.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -8,27 +8,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/btn_single_img"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="40dp"
-            android:background="@color/rx_picker_colorPrimaryDark"
+            android:background="@color/rxpicker_colorPrimaryDark"
             android:gravity="center"
             android:text="图片单选"
             android:textColor="#FFF"
             android:textSize="16sp" />
 
-
         <TextView
             android:id="@+id/btn_multi_img"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:background="@color/rx_picker_colorPrimaryDark"
+            android:background="@color/rxpicker_colorPrimaryDark"
             android:gravity="center"
             android:text="图片多选"
             android:textColor="#FFF"
@@ -39,8 +37,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="1dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
