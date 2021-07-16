@@ -2,10 +2,11 @@ package com.github.lany192.rxpicker.fragment;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+
+import androidx.fragment.app.Fragment;
 
 import com.github.lany192.rxpicker.RxPicker;
 import com.github.lany192.rxpicker.bean.ImageItem;

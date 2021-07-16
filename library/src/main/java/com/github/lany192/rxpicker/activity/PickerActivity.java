@@ -27,7 +27,9 @@ public class PickerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picker);
         Disposable disposable = new RxPermissions(this)
-                .request(Manifest.permission.CAMERA)
+                .request(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
                 .subscribe(granted -> {
                     if (granted) {
                         String tag = PickerFragment.class.getSimpleName();

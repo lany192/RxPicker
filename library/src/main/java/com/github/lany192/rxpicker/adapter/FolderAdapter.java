@@ -18,7 +18,7 @@ import java.util.List;
 
 
 public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ViewHolder> {
-    private List<ImageFolder> datas;
+    private final List<ImageFolder> datas;
     private int checkPosition = 0;
     private View.OnClickListener dismissListener;
 

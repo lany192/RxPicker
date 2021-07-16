@@ -1,11 +1,12 @@
 package com.github.lany192.rxpicker;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.ImageView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.github.lany192.rxpicker.activity.PickerActivity;
 import com.github.lany192.rxpicker.bean.ImageItem;
@@ -129,15 +130,15 @@ public class RxPicker {
     /**
      * start picker from activity
      */
-    public Observable<List<ImageItem>> start(Activity activity) {
-        return start(activity.getFragmentManager());
+    public Observable<List<ImageItem>> start(FragmentActivity activity) {
+        return start(activity.getSupportFragmentManager());
     }
 
     /**
      * start picker from fragment
      */
     public Observable<List<ImageItem>> start(Fragment fragment) {
-        return start(fragment.getFragmentManager());
+        return start(fragment.getParentFragmentManager());
     }
 
     /**
