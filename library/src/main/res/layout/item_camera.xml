@@ -3,6 +3,7 @@
     android:id="@+id/camera_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="1dp"
     android:background="#FF2B2B2B"
     android:foreground="?android:selectableItemBackground"
     android:minWidth="100dp"

@@ -1,26 +1,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.caimuhao.rxpicker">
+    package="com.github.lany192.rxpicker">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <application
-        android:label="@string/app_name"
-        android:supportsRtl="true">
+    <application android:requestLegacyExternalStorage="true">
 
         <activity
-            android:name=".ui.RxPickerActivity"
+            android:name="com.github.lany192.rxpicker.activity.PickerActivity"
             android:launchMode="singleTop"
             android:theme="@style/RxPicker.AppTheme" />
 
         <activity
-            android:name=".ui.PreviewActivity"
+            android:name="com.github.lany192.rxpicker.activity.PreviewActivity"
             android:launchMode="singleTop"
             android:theme="@style/RxPicker.AppTheme" />
 
         <provider
-            android:name="com.caimuhao.rxpicker.utils.RxPickerProvider"
+            android:name="com.github.lany192.rxpicker.utils.RxPickerProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">

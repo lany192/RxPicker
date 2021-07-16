@@ -4,64 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/nav_top_bar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:elevation="2dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
         app:theme="@style/RxPicker.ToolbarTheme">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:ellipsize="end"
             android:gravity="center_vertical"
-            android:maxWidth="120dp"
-            android:maxLines="1"
-            android:minWidth="50dp"
-            android:text="@string/all_phone_album" />
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:paddingLeft="7dp"
-            android:src="@drawable/ic_spinner_mtrl_am_alpha" />
-    </android.support.v7.widget.Toolbar>
+            <ImageButton
+                android:id="@+id/picker_back_button"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@drawable/vector_back_white" />
 
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxWidth="120dp"
+                android:maxLines="1"
+                android:minWidth="50dp"
+                android:text="@string/all_phone_album" />
 
-    <RelativeLayout
-        android:id="@+id/rl_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/rxpicker_colorPrimaryDark">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:paddingLeft="7dp"
+                android:src="@drawable/ic_spinner_mtrl_am_alpha" />
 
-        <ImageView
-            android:id="@+id/iv_select_preview"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:padding="10dp"
-            android:src="@drawable/ic_eye_white" />
+            <RelativeLayout
+                android:id="@+id/rl_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/iv_select_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:text="确定"
-            android:textColor="@color/rxpicker_width" />
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/iv_select_preview"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_eye_white" />
 
-    <android.support.v7.widget.RecyclerView
+                <TextView
+                    android:id="@+id/iv_select_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="确定"
+                    android:textColor="@color/rxpicker_width" />
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/rl_bottom"
         android:layout_below="@id/nav_top_bar" />
 </RelativeLayout>

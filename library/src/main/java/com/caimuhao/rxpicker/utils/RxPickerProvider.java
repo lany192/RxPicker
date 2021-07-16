@@ -1,8 +1,0 @@
-package com.caimuhao.rxpicker.utils;
-
-
-import android.support.v4.content.FileProvider;
-
-public class RxPickerProvider extends FileProvider {
-
-}

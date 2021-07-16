@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.lany192'
+apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0.0"
     }
@@ -25,11 +24,20 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.google.android.material:material:1.3.0'
+
     implementation 'io.reactivex.rxjava2:rxjava:2.2.11'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'com.github.lany192:ItemDecoration:1.1.7'
-    compileOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.github.lany192'
+            artifactId = 'RxPicker'
+            version = '1.0.0'
+        }
+    }
 }
